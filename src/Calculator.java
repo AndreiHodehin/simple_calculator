@@ -56,10 +56,10 @@ public class Calculator implements ActionListener {
         functionButtons[7] = clrButton;
         functionButtons[8] = negButton;
 
-        for (int i = 0; i < functionButtons.length; i++) {
-            functionButtons[i].addActionListener(this);
-            functionButtons[i].setFont(myFont);
-            functionButtons[i].setFocusable(false);
+        for (JButton functionButton : functionButtons) {
+            functionButton.addActionListener(this);
+            functionButton.setFont(myFont);
+            functionButton.setFocusable(false);
         }
 
         for (int i = 0; i < 10; i++) {
@@ -76,7 +76,6 @@ public class Calculator implements ActionListener {
         panel = new JPanel();
         panel.setBounds(50,100,300,300);
         panel.setLayout(new GridLayout(4,4,10,10));
-//        panel.setBackground(C);
         panel.add(numberButtons[1]);
         panel.add(numberButtons[2]);
         panel.add(numberButtons[3]);
@@ -104,6 +103,7 @@ public class Calculator implements ActionListener {
     }
 
     public static void main(String[] args) {
+
         Calculator c = new Calculator();
     }
     @Override
@@ -115,36 +115,43 @@ public class Calculator implements ActionListener {
                 infoField.setText(infoField.getText().concat(String.valueOf(i)));
             }
         }
+        
         if(e.getSource() == decButton) {
             textField.setText(textField.getText().concat("."));
             infoField.setText(infoField.getText().concat("."));
         }
+
         if(e.getSource() == addButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '+';
             textField.setText("");
             infoField.setText(infoField.getText().concat("+"));
         }
+
         if(e.getSource() == subButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '-';
             textField.setText("");
             infoField.setText(infoField.getText().concat("-"));
         }
+
         if(e.getSource() == mulButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '*';
             textField.setText("");
             infoField.setText(infoField.getText().concat("*"));
         }
+
         if(e.getSource() == divButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '/';
             textField.setText("");
             infoField.setText(infoField.getText().concat("/"));
         }
+
         if(e.getSource() == equButton) {
             num2 = Double.parseDouble(textField.getText());
+
             switch (operator){
                 case '+':
                     result = num1 + num2;
@@ -156,13 +163,13 @@ public class Calculator implements ActionListener {
                     result = num1 * num2;
                     break;
                 case '/':
-                    if(num2 == 0){
+                    if(num2 == 0) {
                         break;
                     }
                     result = num1 / num2;
                     break;
             }
-            if (num2 == 0){
+            if (num2 == 0) {
                 textField.setText("Dividing by 0");
                 infoField.setText("");
                 num1 = 0;
@@ -178,6 +185,7 @@ public class Calculator implements ActionListener {
             textField.setText("");
             infoField.setText("");
         }
+
         if(e.getSource() == delButton) {
             String str = textField.getText();
             str = str.substring(0,str.length()-1);
